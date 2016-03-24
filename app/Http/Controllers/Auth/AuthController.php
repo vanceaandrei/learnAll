@@ -7,6 +7,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\Professor;
+use App\Student;
 
 class AuthController extends Controller
 {
@@ -50,6 +52,7 @@ class AuthController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
+            'surname' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -63,10 +66,33 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
+            'surname' => $data['surname'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        if($data['account_type'] == 'professor'){
+            //role 1 = professor
+
+            //create a professor
+            Professor::create([
+                'user_id' => $user['id'],
+                'specialization' => $data['specialization'],
+            ]);
+
+            $user->attachRole(1);
+        }else {
+            //role 2 = student
+
+            //create a student
+            Student::create([
+                'user_id' => $user['id'],
+            ]);
+
+            $user->attachRole(2);
+        }
+        return $user;
     }
 }

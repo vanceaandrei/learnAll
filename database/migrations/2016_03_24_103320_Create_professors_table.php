@@ -12,7 +12,14 @@ class CreateProfessorsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('professors', function(Blueprint $table){
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->string('specialization');
+            $table->timestamps();
+        });
+
+        
     }
 
     /**
@@ -22,6 +29,6 @@ class CreateProfessorsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('professors');
     }
 }

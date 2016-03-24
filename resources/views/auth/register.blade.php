@@ -10,6 +10,22 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {!! csrf_field() !!}
 
+                        <div class="form-group{{ $errors->has('account_type') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Account Type</label>
+
+                            <div class="col-md-6">
+                                <select style = "color:black" name="account_type">
+                                    <option value="student">Student</option>
+                                    <option value="professor">Professor</option>
+                                </select>
+                                @if ($errors->has('account_type'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('account_type') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Name</label>
 
@@ -19,6 +35,34 @@
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('surname') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Surname</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="surname" value="{{ old('surname') }}">
+
+                                @if ($errors->has('surname'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('surname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('specialization') ? ' has-error' : '' }}" id="specialization_div" hidden>
+                            <label class="col-md-4 control-label">Specialization</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="specialization" value="{{ old('specialization') }}">
+
+                                @if ($errors->has('specialization'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('specialization') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -79,4 +123,16 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $('select[name="account_type"]').change(function(){
+        if($(this).val() == 'professor'){
+            $('#specialization_div').show();
+        }else{
+            $('#specialization_div').hide();
+        }
+    });
+</script>
 @endsection

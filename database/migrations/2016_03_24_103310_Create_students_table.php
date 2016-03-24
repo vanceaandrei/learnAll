@@ -12,7 +12,11 @@ class CreateStudentsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('students', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -22,6 +26,6 @@ class CreateStudentsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('students');
     }
 }
