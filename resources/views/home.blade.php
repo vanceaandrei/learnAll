@@ -8,7 +8,11 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    @if(Auth::user()->hasRole('prof'))
+                        You are logged in as professor!
+                    @else
+                        You are logged in as student!
+                    @endif
                 </div>
             </div>
         </div>
