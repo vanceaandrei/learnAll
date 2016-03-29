@@ -1,0 +1,22 @@
+video{
+
+	width: 320px;
+	height: 240px;
+	border: 2px solid white;
+	transform: rotateY(180deg);
+}
+.localVideo{
+		border: 2px solid white;
+
+	float:left;
+	
+}
+.clientVideo{
+		border: 2px solid white;
+
+	float:right;
+}
+.invert {
+    -webkit-filter: invert(.8);
+    filter: invert(.8);
+}
