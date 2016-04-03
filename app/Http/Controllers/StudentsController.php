@@ -12,4 +12,8 @@ class StudentsController extends Controller
     	
     	return view('students.homepage');
     }
+
+    public function addCourse(){
+    	
+    }
 }
