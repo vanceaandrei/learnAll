@@ -12,10 +12,11 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
+	//routes for everyone
+	Route::get('/', function(){
+		return view('welcome');
+	});
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
     Route::get('/profile', function(){
     	return view('streaming.profile');
     });
@@ -24,6 +25,7 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-
+	
     Route::get('/home', 'HomeController@index');
+
 });
