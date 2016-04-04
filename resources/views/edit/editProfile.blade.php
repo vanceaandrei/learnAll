@@ -50,7 +50,7 @@
                                 @endif
                             </div>
                         </div>
-
+                        @if(Entrust::hasRole('prof'))
                         <div class="form-group{{ $errors->has('specialization') ? ' has-error' : '' }}" >
                             <label class="col-md-4 control-label">Specialization</label>
 
@@ -64,7 +64,7 @@
                                 @endif
                             </div>
                         </div>
-
+                        @endif
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">E-Mail Address</label>
 
@@ -94,6 +94,7 @@
     </div>
 </div>
 @endsection
+
 
 @section('styles')
 <link rel="stylesheet" type="text/css" href="{{URL::Asset('css/myStyle.css')}}">

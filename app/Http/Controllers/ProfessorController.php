@@ -17,7 +17,7 @@ class ProfessorController extends Controller
     	//var_dump(Input::file('pic'));
     	$user = Auth::user();
     	//dd($user->name);
-    	$user->picture = Input::file('pic');
+    	$user->image = Input::file('pic');
     	//dd(Input::file('pic'));
     	$user->save();
     	return redirect('profile');

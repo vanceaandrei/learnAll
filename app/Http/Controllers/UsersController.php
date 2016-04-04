@@ -18,15 +18,17 @@ class UsersController extends Controller
     	}
     	return view('profil',compact('specializare'));
     }
-
     public function change(Request $r){
     	$user = Auth::user();
     	// dd($r->toArray());
+    	$this->validate($r,['name'=>'required|max:250','surname'=>'required|max:250',
+    		'email'=>'required|email']);
     	$user->name=$r->name;
     	$user->surname=$r->surname;
     	$user->email=$r->email;
 
     	if($user->hasRole('prof')){
+    		$this->validate($r,['specialization'=>'required']);
     		$prof = Professor::where('user_id','=',$user->id)->first();
     		$prof->specialization = $r->specialization;
     		$prof->save();
