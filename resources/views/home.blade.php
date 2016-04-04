@@ -25,7 +25,7 @@
 @section('scripts')
 <script type="text/javascript">
     document.getElementById("stream").onclick = function () {
-        location.href = " {{ url('/profile') }}";
+        location.href = " {{ url('/stream') }}";
     };
 </script>
 @endsection
