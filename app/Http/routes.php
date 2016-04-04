@@ -17,9 +17,8 @@ Route::group(['middleware' => ['web']], function () {
 		return view('welcome');
 	});
 
-    Route::get('/profile', function(){
-    	return view('streaming.profile');
-    });
+    Route::get('/profile', 'UsersController@profile');
+    Route::get('/editPicture' , 'UsersController@editPicture');
 
 });
 
