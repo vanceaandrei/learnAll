@@ -36,4 +36,7 @@ class ProfessorController extends Controller
         }
         return response()->json(['success' => true], 200);
     }
+    public function add(){
+        return redirect('home');
+    }
 }

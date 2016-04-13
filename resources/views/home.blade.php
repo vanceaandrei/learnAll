@@ -72,6 +72,39 @@
                     </div>
                     <div class = "col-md-6 col-sm-6 col-xs-6 col-lg-6">
                             <p>Email</p> {{Auth::user()->email}}
+                            <br>
+                            <br>
+                            <link rel="stylesheet" href="{{ asset('css/ceva.css') }}" />
+                        <div class="calendar">
+                            <button id="popupButton" class="btn btn-primary fa fa-plus-square">  Add Course</button>
+                        </div>
+                        <form class="form-horizontal" method="post" action="">
+                            {!!csrf_field()!!}
+                        <div class="popup">
+                            <h2>   Courses</h2>
+                            <div class="form-group">
+                            <label class="col-md-4 control-label">Name</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="1">
+                            </div>
+                            </div> 
+                            <br>
+                            <div class="form-group">
+                            <label class="col-md-4 control-label">Ceva</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="2">
+                            </div>
+                            </div>
+                            <br>
+                            <label class="col-md-4 control-label">Altceva</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="3">
+                            </div>
+                            <div class="form-group col-md-4">
+                            <input type="submit" class="btn btn-primary">
+                            </div>
+                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="row" style="padding-top:15px">
@@ -117,4 +150,19 @@
         location.href = " {{ url('/stream') }}";
     };
 </script>
+<script type="text/javascript">
+document.getElementById("popupButton").onclick = function() {
+ document.getElementsByClassName("popup")[0].style.display = "block"    
+ }
+document.getElementById("activity").onchange = function() {
+document.getElementsByClassName("popup")[0].style.display = "none" 
+ var selectedValue = this.options[this.selectedIndex].innerHTML;
+ if (selectedValue == "work") {
+    document.getElementsByClassName("popup")[1].style.display = "block";       
+ }
+if (selectedValue == "youth leave") {
+    document.getElementsByClassName("popup")[2].style.display = "block";       
+     }
+}
+</script>                            
 @endsection

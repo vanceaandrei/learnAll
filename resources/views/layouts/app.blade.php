@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
-    <link href="https://bootswatch.com/darkly/bootstrap.min.css" rel="stylesheet">
+    <link href="http://bootswatch.com/darkly/bootstrap.min.css" rel="stylesheet">
     {{-- <link href="{{ URL::Asset('css/styles.css') }}" rel="stylesheet"> --}}
 
     @yield('styles') 

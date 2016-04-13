@@ -31,6 +31,10 @@ Route::group(['middleware' => ['web']], function () {
     
     Route::post('edit/editProfile', 'UsersController@change');
 
+    Route::get('/ceva', function(){
+        return view('ceva');
+    });
+    Route::post('/home','ProfessorController@add');
 
 });
 

@@ -1,0 +1,18 @@
+.calendar {
+    width: 40px;
+    height: 80px;
+
+}
+.popup {
+    width: 280px;
+    height: 340px;
+    margin:0 auto;
+    border-radius: 7px;
+    background: #6E6E6E;
+    margin:30px auto 0;
+    padding:6px;
+    display: none;
+    position: absolute;
+    top: 105px;
+    left: 2px;
+}
