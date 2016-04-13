@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use App\Professor;
 use App\Student;
+use App\Course;
 
 class AuthController extends Controller
 {

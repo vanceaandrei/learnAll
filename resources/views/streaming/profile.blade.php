@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading"> {{ Auth::user()->name }}</div>
+                <div class="panel-heading">{{Auth::user()->roles()->first()->display_name}} {{Auth::user()->name }}</div>
 
                 <div class="panel-body">
                     <video autoplay id="local" class="localVideo invert">

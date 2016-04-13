@@ -68,6 +68,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('courseName') ? ' has-error' : '' }}" id="courseName_div" hidden>
+                            <label class="col-md-4 control-label">Course Name</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="courseName" value="{{ old('courseName') }}">
+
+                                @if ($errors->has('courseName'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('courseName') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">E-Mail Address</label>
 
@@ -130,9 +144,12 @@
     $('select[name="account_type"]').change(function(){
         if($(this).val() == 'professor'){
             $('#specialization_div').show();
+            $('#courseName_div').show();
         }else{
             $('#specialization_div').hide();
+            $('#courseName_div').hide();
         }
+        
     });
 </script>
 @endsection

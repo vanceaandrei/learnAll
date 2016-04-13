@@ -19,6 +19,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/profile', 'UsersController@profile');
     Route::get('/editPicture' , 'UsersController@editPicture');
+    Route::post('/home', 'ProfessorsController@addCourse');
+    Route::get('/stream', 'ProfessorsController@stream');
 
 });
 

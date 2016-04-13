@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Auth;
-
+use App\Course;
+use App\Subscribe;
 class HomeController extends Controller
 {
     /**
@@ -25,10 +26,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->hasRole('stud')){
-            return view('students/homepage');
+        $user = Auth::user();
+        if($user->hasRole('stud')){
+            $subscribes = Subscribe::where('id_student', '=', $user->id)->get();
+            $courses = null;
+            foreach($subscribes as $subscribe){
+                $courses += Course::where('id', '=', $subscribe->id)->get();
+            }
+            
+            return view('students/homepage',compact('courses'));
         }else{
-            return view('home');
+            $courses = Course::where('id_professor', '=', $user->id)->get();
+            return view('home',compact('courses'));
         }
     }
 }
