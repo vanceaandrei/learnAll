@@ -4,137 +4,110 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+            <!-- Pagina de home pentru student  -->
             @if(Auth::user()->hasRole('stud'))
             <div class="panel panel-default">
                 <div class="panel-heading">
                         {{Auth::user()->name}} {{Auth::user()->surname}}
-                    </div>
+                </div>
 
                 <div class="panel-body">
                     <div class = "row">
-                    <div class = "col-md-6 col-sm-6 col-xs-6 col-lg-6">
-                            <p>Photo</p>
-                            <img width = "400px" height = "150px" src={{Auth::user()->name}}>
+                        <div class = "col-md-6 col-sm-6 col-xs-6 col-lg-6">
+                                <p>Photo</p>
+                                <img width = "400px" height = "150px" src={{Auth::user()->name}}>
+                        </div>
+                        <div class = "col-md-6 col-sm-6 col-xs-6 col-lg-6">
+                                <p>Email</p> {{Auth::user()->email}}
+                        </div>
                     </div>
-                    <div class = "col-md-6 col-sm-6 col-xs-6 col-lg-6">
-                            <p>Email</p> {{Auth::user()->email}}
+                    <div class="row" style="padding-top:15px">
+                        <div class = "col-md-6 col-sm-6 col-xs-6 col-lg-6">
+                            <p>Search
+                            </p>
+                            <input type="text" id="search" name="course"> 
+                            <button class="btn btn-primary " id="demo">
+                                <i class="fa fa-btn fa-search"></i>
+                                Search
+                            </button>                 
+                        </div>
                     </div>
                 </div>
-                <div class="row" style="padding-top:15px">
-                    <div class = "col-md-6 col-sm-6 col-xs-6 col-lg-6">
-                <p>Search
-                 </p>
-                 <input type="text" id="search" name="course"> 
-                 <button class="btn btn-primary " id="demo" onclick="search()">
-                    <i class="fa fa-btn fa-search"></i>Search</button> 
-                 <script type="text/javascript">
-                 function search() {
-                        var ceva = document.getElementById("search");
-                        alert(ceva.value);
-                        //var courses[] = course::where('name','=',ceva.value);
-                        // for(var i=0;i<course.length;i++){
-                        // }
-                        var num_rows = 5;
-                        
-                        var theader = '<table border="1">\n';
-                        var tbody = '';
-
-                        for( var i=0; i<num_rows;i++)
-                        {
-                            tbody += '<tr>';
-                            
-                                tbody += '<td>';
-                                tbody += '<a href=" {{ url('Courses') }}">'+i+'->'+ceva.value +'  '+ceva.value +'  '+ceva.value+'</a>';
-                                tbody += '</td>';
-                            
-                            tbody += '</tr>\n';
-                        }
-                        var tfooter = '</table>';
-                        document.getElementById('wrapper').innerHTML = theader + tbody + tfooter;
-                    }
-                 </script>
-                 <div id="wrapper"></div>
-                 </div>
-                </div>
-            </div>
             </div>
         @else
+        <!-- Pagina de home pentru profesor -->
             <div class="panel panel-default">
                 <div class="panel-heading">
                         {{Auth::user()->name}} {{Auth::user()->surname}}
-                    </div>
+                </div>
             
-            <div class="panel-body">
+                <div class="panel-body">
                     <div class = "row">
-                    <div class = "col-md-6 col-sm-6 col-xs-6 col-lg-6">
-                            <p>Photo</p>
-                            <img width = "400px" height = "150px" src={{Auth::user()->name}}>
-                    </div>
+                        <div class = "col-md-6 col-sm-6 col-xs-6 col-lg-6">
+                                <p>Photo</p>
+                                <img width = "400px" height = "150px" src={{Auth::user()->name}}>
+                                 <div class="row" style="padding-top:15px">
+                                    <h3>  Elevi inscrisi</h3>
+                    
+                                </div>
+                        </div>
                     <div class = "col-md-6 col-sm-6 col-xs-6 col-lg-6">
                             <p>Email</p> {{Auth::user()->email}}
                             <br>
                             <br>
+                            <!-- Lista cursurilor  -->
+
+                            <div class="col-md-12">
+                                @if(count($courses) > 0)
+                                    <h3>My courses</h3>
+                                    <form class="form-horizontal" method="post" action="/delete">
+                                        {!!csrf_field()!!}
+                                    <ul class="list-group">                                        
+                                    @foreach($courses as $course)                                        
+                                        <li class="list-group-item text-success"> <a href="{{ url('/stream') }}"> {{ $course->name }} </a> 
+                                            <input name="id" value="{{$course->id}}" type="text" hidden>
+                                            <button type="submit" style="float:right" class="fa fa-trash" aria-hidden="true"></button>
+                                        </li>
+                                    @endforeach
+                                    </ul>
+                                </form>
+                                @endif
+                            </div>
+
+                            <br>
+                            <!-- Adauga curs -->
                             <link rel="stylesheet" href="{{ asset('css/ceva.css') }}" />
-                        <div class="calendar">
+                     <div class="row" >
+                        <div class = "col-md-6 col-sm-6 col-xs-6 col-lg-6">
+                            <div id="add_btn" class="buton">
                             <button id="popupButton" class="btn btn-primary fa fa-plus-square">  Add Course</button>
                         </div>
+                        <div id="popupDiv">
                         <form class="form-horizontal" method="post" action="">
                             {!!csrf_field()!!}
                         <div class="popup">
-                            <h2>   Courses</h2>
                             <div class="form-group">
-                            <label class="col-md-4 control-label">Name</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="1">
+                            <label class="col-md-3 control-label">Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="name" id="course_name">
                             </div>
                             </div> 
                             <br>
-                            <div class="form-group">
-                            <label class="col-md-4 control-label">Ceva</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="2">
-                            </div>
-                            </div>
-                            <br>
-                            <label class="col-md-4 control-label">Altceva</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="3">
-                            </div>
-                            <div class="form-group col-md-4">
-                            <input type="submit" class="btn btn-primary">
-                            </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-6 col-lg-6 ">
+                                    <button name="add_course" type="submit" class="btn btn-primary" onClick="return isok()">Add Course</button>
+                                </div>
+                                
                         </div>
                         </form>
-                    </div>
-                </div>
-                <div class="row" style="padding-top:15px">
-                    <p>Elevi inscrisi</p>
-                    <script type="text/javascript">
-                 
-                        //var courses[] = course::where('name','=',ceva.value);
-                        // for(var i=0;i<course.length;i++){
-                        // }
-                        var num_rows = 5;
+                        </div>
+                        </div>
+                      
+                     </div>
                         
-                        var theader = '<table border="1">\n';
-                        var tbody = '';
-
-                        for( var i=0; i<num_rows;i++)
-                        {
-                            tbody += '<tr>';
-                            
-                                tbody += '<td>';
-                                tbody += i+'->'+'ceva  ';
-                                tbody += '</td>';
-                            
-                            tbody += '</tr>\n';
-                        }
-                        var tfooter = '</table>';
-                        document.getElementById('wrapper').innerHTML = theader + tbody + tfooter;
+                    </div>
                     
-                 </script>
-                 <div id="wrapper"></div>
-                </div>
+                    </div>
+               
             </div>
             </div>
         @endif
@@ -150,19 +123,44 @@
         location.href = " {{ url('/stream') }}";
     };
 </script>
+
 <script type="text/javascript">
+
 document.getElementById("popupButton").onclick = function() {
  document.getElementsByClassName("popup")[0].style.display = "block"    
  }
-document.getElementById("activity").onchange = function() {
-document.getElementsByClassName("popup")[0].style.display = "none" 
- var selectedValue = this.options[this.selectedIndex].innerHTML;
- if (selectedValue == "work") {
-    document.getElementsByClassName("popup")[1].style.display = "block";       
- }
-if (selectedValue == "youth leave") {
-    document.getElementsByClassName("popup")[2].style.display = "block";       
-     }
+
+ $('#popupDiv')
+
+</script>
+<script type="text/javascript">
+var ok = false;
+$(document).ready(function() {
+    $('#course_name').on('input', function() {
+                        var input=$(this);
+                        var is_name=input.val();
+                        if(is_name.length > 0 && is_name.length < 25){
+                            input.css("border", "5px solid green");
+                            ok = true;
+                        }else{
+                            input.css("border", "5px solid red");
+                            ok = false;
+                        }
+                    });
+});
+
+function isok(){
+    if(ok != true){
+        alert("Please insert a course name");
+    }
+    return ok;
 }
+
 </script>                            
+<script type="text/javascript">
+$("#add_btn").click(function(){
+    $(this).hide();
+});
+</script>
+
 @endsection

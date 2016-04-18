@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use App\Professor;
 use App\Student;
+use App\Course;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -55,6 +57,7 @@ class AuthController extends Controller
             'surname' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|same:password',
         ]);
     }
 
@@ -80,8 +83,13 @@ class AuthController extends Controller
             Professor::create([
                 'user_id' => $user['id'],
                 'specialization' => $data['specialization'],
-            ]);
 
+            ]);
+            $idProf=$user['id'];            
+            Course::create([
+                'name' => $data['courseName'],
+                'id_professor' => $idProf,
+                ]);
             $user->attachRole(1);
         }else {
             //role 2 = student

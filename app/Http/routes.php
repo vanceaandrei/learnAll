@@ -35,7 +35,8 @@ Route::group(['middleware' => ['web']], function () {
         return view('ceva');
     });
     Route::post('/home','ProfessorController@add');
-
+    
+    Route::post('/delete','ProfessorController@delete');
 });
 
 Route::group(['middleware' => 'web'], function () {

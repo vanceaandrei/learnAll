@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-// use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+//use Illuminate\Support\Facades\Request;
 
 use App\Http\Requests;
 use App\Professor;
 use Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
-
+use App\Course;
+use DB;
+use App\Quotation;
 class ProfessorController extends Controller
 {
     public function update(Request $request){
@@ -36,7 +38,18 @@ class ProfessorController extends Controller
         }
         return response()->json(['success' => true], 200);
     }
-    public function add(){
+    public function add(Request $request){
+        $idProf=Auth::user()->id;
+        Course::create([
+                'name' => $request['name'],
+                'id_professor' => $idProf,
+            ]);
+        return redirect('home');
+    }
+    public function delete(Request $request){
+        $idProf=Auth::user()->id;
+        $course = Course::where('id','=',$request['id'])->first();
+        $course->delete();
         return redirect('home');
     }
 }
