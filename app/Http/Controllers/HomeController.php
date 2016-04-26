@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Course;
 use App\Subscribe;
 use Auth;
+use db;
 class HomeController extends Controller
 {
     /**
@@ -27,6 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $user = Auth::user();
          // if($user->hasRole('stud')){
          //     $subscribes = Subscribe::where('id_student', '=', $user->id)->get();
@@ -37,9 +39,14 @@ class HomeController extends Controller
              
          //     return view('students/homepage',compact('courses'));
          //  }else{
-             
+         if($user->hasRole('stud')){    
               $courses = Course::get();
               return view('home',compact('courses'));
-         //  }
+          }else{
+
+            $courses = Course::where('id_professor', '=', $user->id)->get();
+              return view('home',compact('courses'));
+          }
+         //  
     }
 }
