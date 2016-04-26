@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Professor;
 use Auth;
 use Entrust;
+
 
 class UsersController extends Controller
 {
@@ -16,6 +16,7 @@ class UsersController extends Controller
     	if($user->hasRole('prof')){
     		$specializare = Professor::where('user_id','=',$user->id)->first()->specialization;
     	}
+
     	return view('profil',compact('specializare'));
     }
     public function change(Request $r){
@@ -39,4 +40,5 @@ class UsersController extends Controller
     }
 
 }
+
 

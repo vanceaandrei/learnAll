@@ -7,6 +7,7 @@
             <!-- Pagina de home pentru student  -->
             @if(Auth::user()->hasRole('stud'))
             <div class="panel panel-default">
+
                 <div class="panel-heading">
                         {{Auth::user()->name}} {{Auth::user()->surname}}
                 </div>
@@ -40,6 +41,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         @else
         <!-- Pagina de home pentru profesor -->
@@ -125,6 +127,7 @@
 </div>
 @endsection
 @section('scripts')
+
 <script type="text/javascript">
     document.getElementById("stream").onclick = function () {
         location.href = " {{ url('/stream') }}";

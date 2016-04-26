@@ -12,6 +12,11 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
+	//routes for everyone
+	Route::get('/', function(){
+		return view('welcome');
+	});
+
 
     Route::get('/', function () {
         return view('welcome');
@@ -27,6 +32,7 @@ Route::group(['middleware' => ['web']], function () {
     });
     Route::get('/profile', 'UsersController@profile');
 
+
     Route::post('edit/editPicture', 'ProfessorController@update');
     
     Route::post('edit/editProfile', 'UsersController@change');
@@ -41,6 +47,7 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-
+	
     Route::get('/home', 'HomeController@index');
+
 });
