@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'clashthepirate@gmail.com', 'name' => 'Darksido1'],
+    'from' => ['address' => 'g.ungurean94@gmail.com', 'name' => 'Admin'],
 
     /*
     |--------------------------------------------------------------------------
@@ -68,7 +68,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
 
     /*
     |--------------------------------------------------------------------------

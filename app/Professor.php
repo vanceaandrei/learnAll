@@ -9,5 +9,6 @@ class Professor extends Model
     protected $fillable = [
     	'user_id',
     	'specialization',
+    	'courseName',
     ];
 }
