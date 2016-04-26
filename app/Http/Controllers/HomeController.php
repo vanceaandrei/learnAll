@@ -28,18 +28,18 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-         if($user->hasRole('stud')){
-             $subscribes = Subscribe::where('id_student', '=', $user->id)->get();
-             $courses = null;
-             foreach($subscribes as $subscribe){
-                 $courses += Course::where('id', '=', $subscribe->id)->get();
-             }
+         // if($user->hasRole('stud')){
+         //     $subscribes = Subscribe::where('id_student', '=', $user->id)->get();
+         //     $courses = null;
+         //     foreach($subscribes as $subscribe){
+         //         $courses += Course::where('id', '=', $subscribe->id)->get();
+         //     }
              
-             return view('students/homepage',compact('courses'));
-          }else{
+         //     return view('students/homepage',compact('courses'));
+         //  }else{
              
-             $courses = Course::where('id_professor', '=', $user->id)->get();
-             return view('home',compact('courses'));
-          }
+              $courses = Course::get();
+              return view('home',compact('courses'));
+         //  }
     }
 }

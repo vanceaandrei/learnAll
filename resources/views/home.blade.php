@@ -23,13 +23,20 @@
                     </div>
                     <div class="row" style="padding-top:15px">
                         <div class = "col-md-6 col-sm-6 col-xs-6 col-lg-6">
-                            <p>Search
-                            </p>
-                            <input type="text" id="search" name="course"> 
-                            <button class="btn btn-primary " id="demo">
-                                <i class="fa fa-btn fa-search"></i>
-                                Search
-                            </button>                 
+                            
+                            @if(count($courses) > 0)
+                                    <h3>My courses</h3>
+                                   
+                                        {!!csrf_field()!!}
+                                    <ul class="list-group">                                        
+                                    @foreach($courses as $course)                                        
+                                        <li class="list-group-item text-success"> <a href="{{ url('/stream') }}"> {{ $course->name }} </a> 
+                                            <input name="id" value="{{$course->id}}" type="text" hidden>
+                                            
+                                        </li>
+                                    @endforeach
+                                    </ul>
+                                @endif              
                         </div>
                     </div>
                 </div>
