@@ -17,11 +17,31 @@ Route::group(['middleware' => ['web']], function () {
 		return view('welcome');
 	});
 
-    Route::get('/profile', 'UsersController@profile');
-    Route::get('/editPicture' , 'UsersController@editPicture');
-    Route::post('/home', 'ProfessorsController@addCourse');
-    Route::get('/stream', 'ProfessorsController@stream');
 
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    Route::get('/stream', function(){
+    	return view('streaming.profile');
+    });
+    Route::get('edit/editProfile', function(){
+    	return view('edit/editProfile');
+    });
+    Route::get('edit/editPicture', function(){
+        return view('edit/editPicture');
+    });
+    Route::get('/profile', 'UsersController@profile');
+
+    Route::post('edit/editPicture', 'ProfessorController@update');
+    
+    Route::post('edit/editProfile', 'UsersController@change');
+
+    Route::get('/ceva', function(){
+        return view('ceva');
+    });
+    Route::post('/home','ProfessorController@add');
+    
+    Route::post('/delete','ProfessorController@delete');
 });
 
 Route::group(['middleware' => 'web'], function () {

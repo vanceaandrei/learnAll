@@ -12,8 +12,9 @@
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
+    <script type='text/javascript' src="{{URL::Asset('js/jquery.min.js') }}"></script>
     <!-- Styles -->
-    <link href="https://bootswatch.com/darkly/bootstrap.min.css" rel="stylesheet">
+    <link href="http://bootswatch.com/darkly/bootstrap.min.css" rel="stylesheet">
     {{-- <link href="{{ URL::Asset('css/styles.css') }}" rel="stylesheet"> --}}
 
     @yield('styles') 
@@ -74,7 +75,8 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/profile') }}"><i class="fa fa-btn fa-cog"></i>Profile</a></li>
+                                <li><a href="{{ url('/profile') }}"><i class="fa fa-btn fa fa-cog"></i>Profile</a></li>
+
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
